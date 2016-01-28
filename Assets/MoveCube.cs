@@ -10,14 +10,20 @@ public class MoveCube : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             int current_Cube = gameObject.GetComponent<CubeColor>().selectedcube;
-            GameObject cube = GameObject.Find("Cube" + current_Cube);
-            cube.transform.Translate(new Vector3(0, 1, 0));
+			if (current_Cube > -1)
+			{
+            	GameObject cube = GameObject.Find("Cube" + current_Cube);
+            	cube.transform.Translate(new Vector3(0, 1, 0));
+			}
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             int current_Cube = gameObject.GetComponent<CubeColor>().selectedcube;
-            GameObject cube = GameObject.Find("Cube" + current_Cube);
-            cube.transform.Translate(new Vector3(0, -1, 0));
+			if (current_Cube > -1)
+			{
+            	GameObject cube = GameObject.Find("Cube" + current_Cube);
+            	cube.transform.Translate(new Vector3(0, -1, 0));
+			}
         }
     }
 }

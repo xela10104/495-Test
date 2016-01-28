@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class CubeColor : MonoBehaviour
 {
     public int selectedcube = -1;
+	public int cubenumber = -1;
+	public int groupnumber = -1;
     private int dayoftheweek;
 
     // Use this for initialization
@@ -15,15 +17,34 @@ public class CubeColor : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        ColorData cols = new ColorData();
+		ColorData cols = new ColorData();
 
-        for (int i = 0; i < 5; i++) {
-            GameObject o = GameObject.Find("Cube" + i);
-            o.GetComponent<Renderer>().material.color = cols.GetAColorToUse(i);
-        }
 
+		cubenumber++;
+        GameObject o = GameObject.Find("Cube" + cubenumber);
+		if (o == null)
+		{
+			cubenumber = 0;
+			o = GameObject.Find("Cube" + cubenumber);
+		}
+        o.GetComponent<Renderer>().material.color = cols.GetAColorToUse(cubenumber);
         if (Input.GetButtonDown("Jump"))
             set_scale_of_cubes();
+
+
+
+		/*
+		groupnumber++;
+		cubenumber++;
+		GameObject o = GameObject.Find ("Cubes" + groupnumber + "/Cube" + cubenumber);
+		o.GetComponent<Renderer>().material.color = cols.GetAColorToUse(cubenumber);
+		if (Input.GetButtonDown("Jump"))
+			set_scale_of_cubes();
+
+*/
+
+
+
     }
 
     private void set_scale_of_cubes()
@@ -36,13 +57,18 @@ public class CubeColor : MonoBehaviour
         }
         selectedcube++;
         o = GameObject.Find("Cube" + selectedcube);
+		if (o == null) 
+		{
+			selectedcube = 0;
+			o = GameObject.Find("Cube" + selectedcube);
+		}
         o.transform.localScale = new Vector3(1, 2, 1);
     }
 
     public float yOfCube(int cubeNumber)
     {
-        GameObject ob = GameObject.Find("Cube" + selectedcube);
-        return ob.transform.localScale.y;
+		GameObject ob = GameObject.Find ("Cube" + selectedcube);
+		return ob.transform.localScale.y;
     }
 }
 
